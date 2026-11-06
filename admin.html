@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>แอดมิน — ROV Tournament</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header class="toolbar">
+    <h1>⚙️ แอดมิน</h1>
+    <a href="index.html" class="nav-link">&larr; หน้าจอโชว์ผัง</a>
+  </header>
+
+  <main>
+    <div id="gate" class="passcode-gate">
+      <div class="card">
+        <h2>เข้าสู่ระบบแอดมิน</h2>
+        <div class="field">
+          <label for="f-passcode">รหัสผ่าน</label>
+          <input type="text" id="f-passcode" placeholder="รหัสผ่าน" />
+        </div>
+        <button id="btn-login" class="btn">เข้าสู่ระบบ</button>
+        <div id="login-status" class="status-msg"></div>
+      </div>
+    </div>
+
+    <div id="dashboard" hidden>
+      <div id="setup-card" class="card">
+        <h2>ตั้งทีมแข่งขัน</h2>
+        <div class="field">
+          <label for="f-teams">รายชื่อทีม (บรรทัดละ 1 ทีม)</label>
+          <textarea id="f-teams" rows="8" placeholder="ทีม A&#10;ทีม B&#10;ทีม C&#10;..."></textarea>
+        </div>
+        <button id="btn-setup" class="btn">สุ่มตารางแข่งแบบพบกันหมด</button>
+        <div id="setup-status" class="status-msg"></div>
+      </div>
+
+      <div id="results-card" class="card" hidden>
+        <h2>กรอกผลการแข่งขัน</h2>
+        <div id="champion-banner-admin" hidden class="champion-banner">
+          <div class="label">🏆 ทีมแชมป์เปี้ยน 🏆</div>
+          <div class="name" id="champion-name-admin"></div>
+        </div>
+        <table class="rov">
+          <thead>
+            <tr>
+              <th>คู่แข่ง</th>
+              <th>สกอร์ (2 ใน 3)</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="matches-admin-body"></tbody>
+        </table>
+        <div id="final-admin-section" hidden>
+          <h2 style="margin-top:20px">รอบชิงชนะเลิศ</h2>
+          <table class="rov">
+            <tbody id="final-admin-body"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="card">
+        <button id="btn-reset" class="btn secondary">เริ่มใหม่ (ล้างทีมทั้งหมด)</button>
+        <div id="reset-status" class="status-msg"></div>
+      </div>
+    </div>
+  </main>
+
+  <script src="js/config.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>

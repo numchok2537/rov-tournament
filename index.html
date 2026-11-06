@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ตารางแข่งขัน ROV</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header class="toolbar">
+    <h1>🏆 ROV TOURNAMENT</h1>
+    <a href="admin.html" class="nav-link">หน้าแอดมิน &rarr;</a>
+  </header>
+
+  <main>
+    <div id="placeholder" class="placeholder">กำลังโหลดข้อมูลการแข่งขัน...</div>
+
+    <div id="content" hidden>
+      <div id="champion-section" hidden>
+        <div class="champion-banner">
+          <div class="label">🏆 ทีมแชมป์เปี้ยน 🏆</div>
+          <div class="name" id="champion-name"></div>
+        </div>
+      </div>
+
+      <div id="next-match-section" class="card" hidden>
+        <h2 id="next-match-heading">คู่ถัดไป</h2>
+        <div class="next-match">
+          <div class="team" id="next-team-a"></div>
+          <div class="vs">VS</div>
+          <div class="team" id="next-team-b"></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>ตารางอันดับ</h2>
+        <table class="rov standings">
+          <thead>
+            <tr>
+              <th>ทีม</th>
+              <th>แข่ง</th>
+              <th>ชนะ</th>
+              <th>แพ้</th>
+              <th>คะแนน</th>
+              <th>เซต +/-</th>
+            </tr>
+          </thead>
+          <tbody id="standings-body"></tbody>
+        </table>
+      </div>
+
+      <div class="card">
+        <h2>ตารางแข่งทั้งหมด (พบกันหมด)</h2>
+        <table class="rov">
+          <thead>
+            <tr>
+              <th>คู่แข่ง</th>
+              <th>ผล</th>
+            </tr>
+          </thead>
+          <tbody id="matches-body"></tbody>
+        </table>
+      </div>
+
+      <div id="final-section" class="card" hidden>
+        <h2>รอบชิงชนะเลิศ</h2>
+        <table class="rov">
+          <tbody id="final-body"></tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+
+  <script src="js/config.js"></script>
+  <script src="js/display.js"></script>
+</body>
+</html>
