@@ -111,6 +111,37 @@ main {
   padding-left: 10px;
 }
 
+.toolbar h1 {
+  text-shadow: 0 0 10px rgba(255, 210, 76, 0.5);
+}
+
+.live-card {
+  position: relative;
+  border-color: var(--accent);
+  background: radial-gradient(circle at 50% 0%, rgba(255, 70, 85, 0.12), var(--panel) 70%);
+  animation: live-border-pulse 2.2s ease-in-out infinite;
+  overflow: hidden;
+}
+
+.live-card h2 {
+  color: var(--gold);
+  border-left-color: var(--gold);
+}
+
+.live-badge {
+  position: absolute;
+  top: 14px;
+  right: 18px;
+  font-size: 13px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  color: #fff;
+  background: var(--accent);
+  padding: 3px 10px;
+  border-radius: 999px;
+  animation: live-badge-blink 1.4s ease-in-out infinite;
+}
+
 .next-match {
   display: flex;
   align-items: center;
@@ -120,16 +151,64 @@ main {
 }
 
 .next-match .team {
-  font-size: 28px;
+  font-size: 30px;
   font-weight: bold;
   text-align: center;
   flex: 1;
+  text-shadow: 0 0 14px rgba(255, 210, 76, 0.35);
+}
+
+.vs-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 70, 85, 0.35), transparent 70%);
 }
 
 .next-match .vs {
-  font-size: 20px;
-  color: var(--accent);
+  font-size: 22px;
+  color: var(--gold);
   font-weight: bold;
+  text-shadow: 0 0 12px rgba(255, 210, 76, 0.8);
+  animation: vs-pulse 1.6s ease-in-out infinite;
+}
+
+@keyframes live-border-pulse {
+  0%, 100% {
+    box-shadow: 0 0 0px rgba(255, 70, 85, 0.0), inset 0 0 0px rgba(255, 70, 85, 0);
+  }
+  50% {
+    box-shadow: 0 0 26px rgba(255, 70, 85, 0.55), inset 0 0 20px rgba(255, 70, 85, 0.12);
+  }
+}
+
+@keyframes live-badge-blink {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.35;
+  }
+}
+
+@keyframes vs-pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.18);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .live-card,
+  .live-badge,
+  .next-match .vs {
+    animation: none !important;
+  }
 }
 
 table.rov {

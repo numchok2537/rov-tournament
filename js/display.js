@@ -11,6 +11,8 @@
   var matchesBody = document.getElementById("matches-body");
   var finalSection = document.getElementById("final-section");
   var finalBody = document.getElementById("final-body");
+  var mvpSection = document.getElementById("mvp-section");
+  var mvpBody = document.getElementById("mvp-body");
 
   function escapeHtml(str) {
     return String(str)
@@ -86,6 +88,7 @@
     matchesBody.innerHTML = (data.matches || [])
       .map(function (m) {
         var result = m.played ? m.scoreA + " - " + m.scoreB : '<span class="pill">ยังไม่แข่ง</span>';
+        var mvp = m.played ? (m.mvp ? "🌟 " + escapeHtml(m.mvp) : "-") : "";
         return (
           '<tr class="' +
           (m.played ? "played" : "") +
@@ -95,6 +98,8 @@
           escapeHtml(m.teamB) +
           "</td><td>" +
           result +
+          "</td><td>" +
+          mvp +
           "</td></tr>"
         );
       })
@@ -105,10 +110,24 @@
       finalSection.hidden = false;
       var f = data.final;
       var fResult = f.played ? f.scoreA + " - " + f.scoreB : '<span class="pill">ยังไม่แข่ง</span>';
+      var fMvp = f.played && f.mvp ? " | 🌟 MVP: " + escapeHtml(f.mvp) : "";
       finalBody.innerHTML =
-        "<tr><td>" + escapeHtml(f.teamA) + " vs " + escapeHtml(f.teamB) + "</td><td>" + fResult + "</td></tr>";
+        "<tr><td>" + escapeHtml(f.teamA) + " vs " + escapeHtml(f.teamB) + "</td><td>" + fResult + fMvp + "</td></tr>";
     } else {
       finalSection.hidden = true;
+    }
+
+    // mvp stats
+    if (data.mvpStats && data.mvpStats.length) {
+      mvpSection.hidden = false;
+      mvpBody.innerHTML = data.mvpStats
+        .map(function (row, i) {
+          var medal = i === 0 ? "🥇 " : i === 1 ? "🥈 " : i === 2 ? "🥉 " : "";
+          return "<tr><td>" + medal + escapeHtml(row.name) + "</td><td>" + row.count + "</td></tr>";
+        })
+        .join("");
+    } else {
+      mvpSection.hidden = true;
     }
   }
 

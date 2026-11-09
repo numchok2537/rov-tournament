@@ -23,11 +23,12 @@
         </div>
       </div>
 
-      <div id="next-match-section" class="card" hidden>
+      <div id="next-match-section" class="card live-card" hidden>
+        <div class="live-badge">🔴 LIVE</div>
         <h2 id="next-match-heading">คู่ถัดไป</h2>
         <div class="next-match">
           <div class="team" id="next-team-a"></div>
-          <div class="vs">VS</div>
+          <div class="vs-wrap"><div class="vs">VS</div></div>
           <div class="team" id="next-team-b"></div>
         </div>
       </div>
@@ -56,6 +57,7 @@
             <tr>
               <th>คู่แข่ง</th>
               <th>ผล</th>
+              <th>MVP</th>
             </tr>
           </thead>
           <tbody id="matches-body"></tbody>
@@ -66,6 +68,19 @@
         <h2>รอบชิงชนะเลิศ</h2>
         <table class="rov">
           <tbody id="final-body"></tbody>
+        </table>
+      </div>
+
+      <div id="mvp-section" class="card" hidden>
+        <h2>🌟 สถิติ MVP</h2>
+        <table class="rov">
+          <thead>
+            <tr>
+              <th>ผู้เล่น</th>
+              <th>จำนวนครั้งที่ได้ MVP</th>
+            </tr>
+          </thead>
+          <tbody id="mvp-body"></tbody>
         </table>
       </div>
     </div>

@@ -183,6 +183,7 @@ function handleRecordResult_(data) {
   match.scoreA = scoreA;
   match.scoreB = scoreB;
   match.played = true;
+  match.mvp = data.mvp ? String(data.mvp).trim() : "";
 
   if (match.stage === "final") {
     state.champion = scoreA > scoreB ? match.teamA : match.teamB;
@@ -210,9 +211,27 @@ function handleRecordResult_(data) {
   return jsonOut_({ ok: true });
 }
 
+function computeMvpStats_(matches, final) {
+  var all = matches.slice();
+  if (final) all.push(final);
+  var counts = {};
+  all.forEach(function (m) {
+    if (!m.played || !m.mvp) return;
+    counts[m.mvp] = (counts[m.mvp] || 0) + 1;
+  });
+  var rows = Object.keys(counts).map(function (name) {
+    return { name: name, count: counts[name] };
+  });
+  rows.sort(function (a, b) {
+    return b.count - a.count;
+  });
+  return rows;
+}
+
 function doGet(e) {
   var state = getState_();
   var standings = computeStandings_(state.teams, state.matches);
+  var mvpStats = computeMvpStats_(state.matches, state.final);
   return jsonOut_({
     teams: state.teams,
     matches: state.matches,
@@ -220,5 +239,6 @@ function doGet(e) {
     champion: state.champion,
     status: state.status,
     standings: standings,
+    mvpStats: mvpStats,
   });
 }

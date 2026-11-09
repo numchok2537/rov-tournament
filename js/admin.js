@@ -112,6 +112,9 @@
     var scoreCell = m.played
       ? m.scoreA + " - " + m.scoreB
       : '<input type="text" class="score-input" placeholder="0" /> - <input type="text" class="score-input" placeholder="0" />';
+    var mvpCell = m.played
+      ? escapeHtml(m.mvp || "-")
+      : '<input type="text" class="mvp-input" placeholder="ชื่อผู้เล่น" />';
     var btnCell = m.played ? '<span class="pill">บันทึกแล้ว</span>' : '<button class="btn small btn-save">บันทึกผล</button>';
     return (
       '<tr data-id="' +
@@ -122,6 +125,8 @@
       escapeHtml(m.teamB) +
       "</td><td>" +
       scoreCell +
+      "</td><td>" +
+      mvpCell +
       "</td><td>" +
       btnCell +
       "</td></tr>"
@@ -163,13 +168,15 @@
         var inputs = row.querySelectorAll(".score-input");
         var scoreA = inputs[0].value.trim();
         var scoreB = inputs[1].value.trim();
+        var mvpInput = row.querySelector(".mvp-input");
+        var mvp = mvpInput ? mvpInput.value.trim() : "";
         if (scoreA === "" || scoreB === "" || scoreA === scoreB) {
           alert("กรอกสกอร์ให้ครบและห้ามเสมอกัน");
           return;
         }
         btn.disabled = true;
         btn.textContent = "...";
-        apiPost({ action: "recordResult", matchId: id, scoreA: scoreA, scoreB: scoreB, passcode: passcode })
+        apiPost({ action: "recordResult", matchId: id, scoreA: scoreA, scoreB: scoreB, mvp: mvp, passcode: passcode })
           .then(function (res) {
             if (res && res.ok) {
               refresh();
